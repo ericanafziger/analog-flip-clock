@@ -79,6 +79,10 @@ p {
   z-index: 3;
   transform: translate(0, -50%);
   box-shadow: 0 10px 20px -7px rgba(0, 0, 0, 0.75), 0 0 4px #000, inset 0 -120px 130px #333, inset 0px 50px 30px rgba(255, 255, 255, .2);
+  background: blue;
+  h1 {
+    margin-top: -55px;
+  }
 }
 
 [id*="-back"],
@@ -94,6 +98,8 @@ p {
   transform: rotateX(-180deg);
   backface-visibility: visible;
   z-index: 2;
+  top: 6.5%;
+  background: red;
   h1 {
     position: absolute;
     top: -147px;
@@ -112,6 +118,7 @@ p {
   height: 43%;
   border-radius: 10px 10px 0px 0px;
   left: 0;
+  background: purple;
 }
 //=============bottom half of bottom panels====================//
 [id*="-bottom-bottom"] {
@@ -120,8 +127,9 @@ p {
   left: 0;
   position: absolute;
   height: 43%;
-  top: 73%;
+  top: 72.5%;
   border-radius: 0px 0px 10px 10px;
+  background: green;
   h1 {
     position: absolute;
     top: -147px;
@@ -158,21 +166,17 @@ p {
 }
 //====================add animations=============================//
 .animate-front {
-  -webkit-animation: flip-front ease-in-out 1s 1 forwards;
-  -webkit-animation-play-state: running;
+  -webkit-animation: flip-front ease-in-out 1s infinite forwards;
 }
 .animate-back {
-  -webkit-animation: flip-back ease-in-out 1s forwards;
-   -webkit-animation-play-state: running;
+  -webkit-animation: flip-back ease-in-out 1s infinite forwards;
+ }
+.animate-front2 {
+  -webkit-animation: flip-front ease-in-out 1s infinite forwards;
 }
-// [id*="-front"] {
-//   -webkit-animation: flip-front ease-in-out 1s forwards;
-//   -webkit-animation-play-state: running;
-// }
-// [id*="-back"] {
-//   -webkit-animation: flip-back ease-in-out 1s forwards;
-//   -webkit-animation-play-state: running;
-// }
+.animate-back2 {
+  -webkit-animation: flip-back ease-in-out 1s infinite forwards;
+ }
 //keyframes
 @keyframes flip-front {
   0% {

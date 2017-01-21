@@ -46,37 +46,6 @@ function clock() {
   }
 
   return output = [{"hour": hour}, {"minutes": minutes}, {"seconds": seconds}, {"secondsBottom": secondsBottom}];
-  // var hoursTensArray = ["hours-tens-top-front", "hours-tens-top-back", "hours-tens-bottom-top", "hours-tens-bottom-bottom"];
-  // for (var i = 0; i < hoursTensArray.length; i++) {
-  //   document.getElementById(hoursTensArray[i]).innerHTML = "<h1>" + hour[0] + "</h1>";
-  // }
-  //
-  // var hoursOnesArray = ["hours-ones-top-front", "hours-ones-top-back", "hours-ones-bottom-top", "hours-ones-bottom-bottom"];
-  // for (var i = 0; i < hoursOnesArray.length; i++) {
-  //   document.getElementById(hoursOnesArray[i]).innerHTML = "<h1>" + hour[1] + "</h1>";
-  // }
-  //
-  // var minutesTensArray = ["minutes-tens-top-front", "minutes-tens-top-back", "minutes-tens-bottom-top", "minutes-tens-bottom-bottom"];
-  // for (var i = 0; i < minutesTensArray.length; i++) {
-  //   document.getElementById(minutesTensArray[i]).innerHTML = "<h1>" + minutes[0] + "</h1>";
-  // }
-  //
-  // var minutesOnesArray = ["minutes-ones-top-front", "minutes-ones-top-back", "minutes-ones-bottom-top", "minutes-ones-bottom-bottom"];
-  // for (var i = 0; i < minutesOnesArray.length; i++) {
-  //   document.getElementById(minutesOnesArray[i]).innerHTML = "<h1>" + minutes[1] + "</h1>";
-  // }
-  // var secondsTensArray = ["seconds-tens-top-front", "seconds-tens-top-back", "seconds-tens-bottom-top"];
-  // for (var i = 0; i < secondsTensArray.length; i++) {
-  //   document.getElementById(secondsTensArray[i]).innerHTML = "<h1>" + seconds[0] + "</h1>";
-  // }
-  // document.getElementById("seconds-tens-bottom-bottom").innerHTML = "<h1>" + secondsBottom[0] + "</h1>";
-  //
-  //
-  // document.getElementById("seconds-ones-top-front").innerHTML = "<h1>" + seconds[1] + "</h1>";
-  //   document.getElementById("seconds-ones-top-back").innerHTML = "<h1>" + seconds[1] + "</h1><p>" + ampm + "</p>";
-  // document.getElementById("seconds-ones-bottom-top").innerHTML = "<h1>" + seconds[1] + "</h1>";
-  // document.getElementById("seconds-ones-bottom-bottom").innerHTML = "<h1>" + secondsBottom[1] + "</h1><p>" + ampm + "</p>";
-
 }
 
 
@@ -87,33 +56,49 @@ $(document).ready(function() {
   var minute;
   var secondsTens;
   var secondsOnes;
+  var secondsOnesBottom;
+  var secondsTensBottom;
 
   setInterval(function(){
     clock();
-
     //================= Seconds Output ================//
     var newSecondsTens = output[2].seconds[0];
+    var newSecondsTensBottom = output[3].secondsBottom[0];
     if (newSecondsTens !== secondsTens) {
       secondsTens = newSecondsTens;
+      secondsTensBottom = newSecondsTensBottom;
     }
     $('#seconds-tens-top-front h1').html(secondsTens);
     $('#seconds-tens-top-back h1').html(secondsTens);
     $('#seconds-tens-bottom-top h1').html(secondsTens);
 
     var newSecondsOnes = output[2].seconds[1];
+    var newSecondsOnesBottom = output[3].secondsBottom[1];
     if (newSecondsOnes !== secondsOnes) {
       secondsOnes = newSecondsOnes;
+      secondsOnesBottom = newSecondsOnesBottom;
     }
     $('#seconds-ones-top-front h1').html(secondsOnes);
-    $('#seconds-ones-top-front h1').html(secondsOnes);
+    $('#seconds-ones-top-back h1').html(secondsOnes);
     $('#seconds-ones-bottom-top h1').html(secondsOnes);
+    $('#seconds-ones-bottom-bottom h1').html(secondsOnesBottom);
   }, 1000);
-  console.log(secondsTens);
 
-  var playState = '-webkit-animation-play-state';
-  $('#seconds-tens-top-front').bind("DOMSubtreeModified", function() {
-    $('#seconds-tens-top-front').toggleClass('animate-front');
-    $('#seconds-tens-top-back').toggleClass('animate-back');
-
+  $('#seconds-ones-top-front').bind("DOMSubtreeModified", function() {
+      $('#seconds-ones-top-front').addClass('animate-front2');
+      $('#seconds-ones-top-back').addClass('animate-back2');
   });
+  $('#seconds-tens-top-front').bind("DOMSubtreeModified", function() {
+    $('#seconds-tens-top-front').addClass('animate-front').delay(1000).queue(function(next){
+      $(this).removeClass('animate-front');
+      $('#seconds-tens-bottom-bottom h1').html(secondsTens);
+      next();
+    });
+    $('#seconds-tens-top-back').addClass('animate-back').delay(1000).queue(function(next){
+      $(this).removeClass('animate-back');
+      $('#seconds-tens-bottom-bottom h1').html(secondsTens);
+      next();
+    });
+  });
+
 });
