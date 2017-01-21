@@ -44,38 +44,74 @@ function clock() {
     var s = "0" + 9;
     secondsBottom = s.toString().split("");
   }
-  var hoursTensArray = ["hours-tens-top-front", "hours-tens-top-back", "hours-tens-bottom-top", "hours-tens-bottom-bottom"];
-  for (var i = 0; i < hoursTensArray.length; i++) {
-    document.getElementById(hoursTensArray[i]).innerHTML = "<h1>" + hour[0] + "</h1>";
-  }
 
-  var hoursOnesArray = ["hours-ones-top-front", "hours-ones-top-back", "hours-ones-bottom-top", "hours-ones-bottom-bottom"];
-  for (var i = 0; i < hoursOnesArray.length; i++) {
-    document.getElementById(hoursOnesArray[i]).innerHTML = "<h1>" + hour[1] + "</h1>";
-  }
+  return output = [{"hour": hour}, {"minutes": minutes}, {"seconds": seconds}, {"secondsBottom": secondsBottom}];
+  // var hoursTensArray = ["hours-tens-top-front", "hours-tens-top-back", "hours-tens-bottom-top", "hours-tens-bottom-bottom"];
+  // for (var i = 0; i < hoursTensArray.length; i++) {
+  //   document.getElementById(hoursTensArray[i]).innerHTML = "<h1>" + hour[0] + "</h1>";
+  // }
+  //
+  // var hoursOnesArray = ["hours-ones-top-front", "hours-ones-top-back", "hours-ones-bottom-top", "hours-ones-bottom-bottom"];
+  // for (var i = 0; i < hoursOnesArray.length; i++) {
+  //   document.getElementById(hoursOnesArray[i]).innerHTML = "<h1>" + hour[1] + "</h1>";
+  // }
+  //
+  // var minutesTensArray = ["minutes-tens-top-front", "minutes-tens-top-back", "minutes-tens-bottom-top", "minutes-tens-bottom-bottom"];
+  // for (var i = 0; i < minutesTensArray.length; i++) {
+  //   document.getElementById(minutesTensArray[i]).innerHTML = "<h1>" + minutes[0] + "</h1>";
+  // }
+  //
+  // var minutesOnesArray = ["minutes-ones-top-front", "minutes-ones-top-back", "minutes-ones-bottom-top", "minutes-ones-bottom-bottom"];
+  // for (var i = 0; i < minutesOnesArray.length; i++) {
+  //   document.getElementById(minutesOnesArray[i]).innerHTML = "<h1>" + minutes[1] + "</h1>";
+  // }
+  // var secondsTensArray = ["seconds-tens-top-front", "seconds-tens-top-back", "seconds-tens-bottom-top"];
+  // for (var i = 0; i < secondsTensArray.length; i++) {
+  //   document.getElementById(secondsTensArray[i]).innerHTML = "<h1>" + seconds[0] + "</h1>";
+  // }
+  // document.getElementById("seconds-tens-bottom-bottom").innerHTML = "<h1>" + secondsBottom[0] + "</h1>";
+  //
+  //
+  // document.getElementById("seconds-ones-top-front").innerHTML = "<h1>" + seconds[1] + "</h1>";
+  //   document.getElementById("seconds-ones-top-back").innerHTML = "<h1>" + seconds[1] + "</h1><p>" + ampm + "</p>";
+  // document.getElementById("seconds-ones-bottom-top").innerHTML = "<h1>" + seconds[1] + "</h1>";
+  // document.getElementById("seconds-ones-bottom-bottom").innerHTML = "<h1>" + secondsBottom[1] + "</h1><p>" + ampm + "</p>";
 
-  var minutesTensArray = ["minutes-tens-top-front", "minutes-tens-top-back", "minutes-tens-bottom-top", "minutes-tens-bottom-bottom"];
-  for (var i = 0; i < minutesTensArray.length; i++) {
-    document.getElementById(minutesTensArray[i]).innerHTML = "<h1>" + minutes[0] + "</h1>";
-  }
-
-  var minutesOnesArray = ["minutes-ones-top-front", "minutes-ones-top-back", "minutes-ones-bottom-top", "minutes-ones-bottom-bottom"];
-  for (var i = 0; i < minutesOnesArray.length; i++) {
-    document.getElementById(minutesOnesArray[i]).innerHTML = "<h1>" + minutes[1] + "</h1>";
-  }
-  var secondsTensArray = ["seconds-tens-top-front", "seconds-tens-top-back", "seconds-tens-bottom-top"];
-  for (var i = 0; i < secondsTensArray.length; i++) {
-    document.getElementById(secondsTensArray[i]).innerHTML = "<h1>" + seconds[0] + "</h1>";
-  }
-  document.getElementById("seconds-tens-bottom-bottom").innerHTML = "<h1>" + secondsBottom[0] + "</h1>";
-
-
-  document.getElementById("seconds-ones-top-front").innerHTML = "<h1>" + seconds[1] + "</h1>";
-    document.getElementById("seconds-ones-top-back").innerHTML = "<h1>" + seconds[1] + "</h1><p>" + ampm + "</p>";
-  document.getElementById("seconds-ones-bottom-top").innerHTML = "<h1>" + seconds[1] + "</h1>";
-  document.getElementById("seconds-ones-bottom-bottom").innerHTML = "<h1>" + secondsBottom[1] + "</h1><p>" + ampm + "</p>";
 }
 
 
 
-setInterval("clock()", 1000); //updates every 1000ms
+$(document).ready(function() {
+
+  var hour;
+  var minute;
+  var secondsTens;
+  var secondsOnes;
+
+  setInterval(function(){
+    clock();
+
+    //================= Seconds Output ================//
+    var newSecondsTens = output[2].seconds[0];
+    if (newSecondsTens !== secondsTens) {
+      secondsTens = newSecondsTens;
+    }
+    $('#seconds-tens-top-front h1').html(secondsTens);
+    $('#seconds-tens-top-back h1').html(secondsTens);
+
+
+    var newSecondsOnes = output[2].seconds[1];
+    if (newSecondsOnes !== secondsOnes) {
+      secondsOnes = newSecondsOnes;
+    }
+    $('#seconds-ones-top-front h1').html(secondsOnes);
+    $('#seconds-ones-top-back h1').html(secondsOnes);
+  }, 1000);
+  console.log(secondsTens);
+
+
+  $('#seconds-tens-top-front').bind("DOMSubtreeModified", function() {
+    $('#seconds-tens-top-front').addClass('animate-front');
+    $('#seconds-tens-top-back').addClass('animate-back');
+  });
+});
