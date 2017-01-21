@@ -140,7 +140,7 @@ p {
   left: 82.4%; }
 
 .animate-front {
-  -webkit-animation: flip-front ease-in-out 1s forwards;
+  -webkit-animation: flip-front ease-in-out 1s 1 forwards;
   -webkit-animation-play-state: running; }
 
 .animate-back {

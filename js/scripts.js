@@ -98,20 +98,22 @@ $(document).ready(function() {
     }
     $('#seconds-tens-top-front h1').html(secondsTens);
     $('#seconds-tens-top-back h1').html(secondsTens);
-
+    $('#seconds-tens-bottom-top h1').html(secondsTens);
 
     var newSecondsOnes = output[2].seconds[1];
     if (newSecondsOnes !== secondsOnes) {
       secondsOnes = newSecondsOnes;
     }
     $('#seconds-ones-top-front h1').html(secondsOnes);
-    $('#seconds-ones-top-back h1').html(secondsOnes);
+    $('#seconds-ones-top-front h1').html(secondsOnes);
+    $('#seconds-ones-bottom-top h1').html(secondsOnes);
   }, 1000);
   console.log(secondsTens);
 
-
+  var playState = '-webkit-animation-play-state';
   $('#seconds-tens-top-front').bind("DOMSubtreeModified", function() {
-    $('#seconds-tens-top-front').addClass('animate-front');
-    $('#seconds-tens-top-back').addClass('animate-back');
+    $('#seconds-tens-top-front').toggleClass('animate-front');
+    $('#seconds-tens-top-back').toggleClass('animate-back');
+
   });
 });
