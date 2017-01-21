@@ -79,7 +79,7 @@ p {
   z-index: 3;
   transform: translate(0, -50%);
   box-shadow: 0 10px 20px -7px rgba(0, 0, 0, 0.75), 0 0 4px #000, inset 0 -120px 130px #333, inset 0px 50px 30px rgba(255, 255, 255, .2);
-  background: blue;
+  // background: blue;
   h1 {
     margin-top: -55px;
   }
@@ -99,7 +99,7 @@ p {
   backface-visibility: visible;
   z-index: 2;
   top: 6.5%;
-  background: red;
+  // background: red;
   h1 {
     position: absolute;
     top: -147px;
@@ -118,7 +118,7 @@ p {
   height: 43%;
   border-radius: 10px 10px 0px 0px;
   left: 0;
-  background: purple;
+  // background: purple;
 }
 //=============bottom half of bottom panels====================//
 [id*="-bottom-bottom"] {
@@ -129,7 +129,7 @@ p {
   height: 43%;
   top: 72.5%;
   border-radius: 0px 0px 10px 10px;
-  background: green;
+  // background: green;
   h1 {
     position: absolute;
     top: -147px;

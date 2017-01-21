@@ -30,6 +30,8 @@ function clock() {
   var minutes = m.toString().split("");
   var seconds = s.toString().split("");
   var secondsBottom = [];
+  var minutesBottom = [];
+  var hoursBottom = [];
 
   if (s > 10) {
     secondsBottom =  (s-1).toString().split("");
@@ -52,21 +54,20 @@ function clock() {
 
 $(document).ready(function() {
 
-  var hour;
-  var minute;
+  var hoursTens;
+  var hoursOnes;
+  var minutesTens;
+  var minutesOnes;
   var secondsTens;
   var secondsOnes;
   var secondsOnesBottom;
-  var secondsTensBottom;
 
   setInterval(function(){
     clock();
     //================= Seconds Output ================//
     var newSecondsTens = output[2].seconds[0];
-    var newSecondsTensBottom = output[3].secondsBottom[0];
     if (newSecondsTens !== secondsTens) {
       secondsTens = newSecondsTens;
-      secondsTensBottom = newSecondsTensBottom;
     }
     $('#seconds-tens-top-front h1').html(secondsTens);
     $('#seconds-tens-top-back h1').html(secondsTens);
@@ -82,12 +83,95 @@ $(document).ready(function() {
     $('#seconds-ones-top-back h1').html(secondsOnes);
     $('#seconds-ones-bottom-top h1').html(secondsOnes);
     $('#seconds-ones-bottom-bottom h1').html(secondsOnesBottom);
-  }, 1000);
+    //================= Minutes Output ================//
+    var newMinutesTens = output[1].minutes[0];
+    if (newMinutesTens !== minutesTens) {
+      minutesTens = newMinutesTens;
+    }
+    $('#minutes-tens-top-front h1').html(minutesTens);
+    $('#minutes-tens-top-back h1').html(minutesTens);
+    $('#minutes-tens-bottom-top h1').html(minutesTens);
 
-  $('#seconds-ones-top-front').bind("DOMSubtreeModified", function() {
-      $('#seconds-ones-top-front').addClass('animate-front2');
-      $('#seconds-ones-top-back').addClass('animate-back2');
+    var newMinutesOnes = output[1].minutes[1];
+    if (newMinutesOnes !== minutesOnes) {
+      minutesOnes = newMinutesOnes;
+    }
+    $('#minutes-ones-top-front h1').html(minutesOnes);
+    $('#minutes-ones-top-back h1').html(minutesOnes);
+    $('#minutes-ones-bottom-top h1').html(minutesOnes);
+    //================= Hours Output ================//
+    var newHoursTens = output[0].hour[0];
+    if (newHoursTens !== hoursTens) {
+      hoursTens = newHoursTens;
+    }
+    $('#hours-tens-top-front h1').html(hoursTens);
+    $('#hours-tens-top-back h1').html(hoursTens);
+    $('#hours-tens-bottom-top h1').html(hoursTens);
+
+    var newHoursOnes = output[0].hour[1];
+    if (newHoursOnes !== hoursOnes) {
+      hoursOnes = newHoursOnes;
+    }
+    $('#hours-ones-top-front h1').html(hoursOnes);
+    $('#hours-ones-top-back h1').html(hoursOnes);
+    $('#hours-ones-bottom-top h1').html(hoursOnes);
+
+  }, 1000);//end of Set Interval function
+
+  //=============Beginning of binding to DOM functions=================//
+
+  $('#hours-tens-top-front').bind("DOMSubtreeModified", function() {
+    $('#hours-tens-top-front').addClass('animate-front').delay(1000).queue(function(next){
+      $(this).removeClass('animate-front');
+      $('#hours-tens-bottom-bottom h1').html(hoursTens);
+      next();
+    });
+    $('#hours-tens-top-back').addClass('animate-back').delay(1000).queue(function(next){
+      $(this).removeClass('animate-back');
+      $('#hours-tens-bottom-bottom h1').html(hoursTens);
+      next();
+    });
   });
+
+  $('#hours-ones-top-front').bind("DOMSubtreeModified", function() {
+    $('#hours-ones-top-front').addClass('animate-front').delay(1000).queue(function(next){
+      $(this).removeClass('animate-front');
+      $('#hours-ones-bottom-bottom h1').html(hoursOnes);
+      next();
+    });
+    $('#hours-ones-top-back').addClass('animate-back').delay(1000).queue(function(next){
+      $(this).removeClass('animate-back');
+      $('#hours-ones-bottom-bottom h1').html(hoursOnes);
+      next();
+    });
+  });
+
+  $('#minutes-tens-top-front').bind("DOMSubtreeModified", function() {
+    $('#minutes-tens-top-front').addClass('animate-front').delay(1000).queue(function(next){
+      $(this).removeClass('animate-front');
+      $('#minutes-tens-bottom-bottom h1').html(minutesTens);
+      next();
+    });
+    $('#minutes-tens-top-back').addClass('animate-back').delay(1000).queue(function(next){
+      $(this).removeClass('animate-back');
+      $('#minutes-tens-bottom-bottom h1').html(minutesTens);
+      next();
+    });
+  });
+
+  $('#minutes-ones-top-front').bind("DOMSubtreeModified", function() {
+    $('#minutes-ones-top-front').addClass('animate-front').delay(1000).queue(function(next){
+      $(this).removeClass('animate-front');
+      $('#minutes-ones-bottom-bottom h1').html(minutesOnes);
+      next();
+    });
+    $('#minutes-ones-top-back').addClass('animate-back').delay(1000).queue(function(next){
+      $(this).removeClass('animate-back');
+      $('#minutes-ones-bottom-bottom h1').html(minutesOnes);
+      next();
+    });
+  });
+
   $('#seconds-tens-top-front').bind("DOMSubtreeModified", function() {
     $('#seconds-tens-top-front').addClass('animate-front').delay(1000).queue(function(next){
       $(this).removeClass('animate-front');
@@ -100,5 +184,9 @@ $(document).ready(function() {
       next();
     });
   });
+  $('#seconds-ones-top-front').bind("DOMSubtreeModified", function() {
+    $('#seconds-ones-top-front').addClass('animate-front2');
+    $('#seconds-ones-top-back').addClass('animate-back2');
+  });
 
-});
+});//end of Document Ready
