@@ -1,4 +1,4 @@
-# Private Eye Design
+# Analog Flip Clock
 #### By _**Erica Nafziger**_
 
 #### This project was built as an exploration of CSS animation. It mimics the display of an old analog clock in the browser while always telling the current time up to the current second. 
